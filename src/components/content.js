@@ -1,5 +1,6 @@
 import Posts from './post';
 import { BsStars } from "react-icons/bs";
+// import HomeSvg from '../img/home.svg';
 
 const Content = () => {
 	return (
@@ -16,11 +17,12 @@ const Content = () => {
 				</div>
 				<div className="postOptions">
 					<ul>
-						<li>io</li>
-						<li>io</li>
-						<li>io</li>
-						<li>io</li>
-						<li>io</li>
+						<li>O</li>
+						<li>O</li>
+						<li>O</li>
+						<li>O</li>
+						<li>O</li>
+						<li>O</li>
 					</ul>
 					<button >Tweet</button>
 				</div>

@@ -21,6 +21,14 @@
     transform: rotate(360deg);
   }
 } */
+
+@media only screen and (max-width: 450px) {
+  .posts>p {
+    background-color: red;
+  }
+}
+
+
 .App {
   display: flex;
 }
@@ -144,6 +152,7 @@
   border: none;
   font-weight: bold;
   background-color: #1A8CD8;
+  /* color: rgb(29, 155, 240); */
   /* padding: 2px; */
   cursor: pointer;
   border-radius: 50px;
@@ -155,6 +164,7 @@
   font-weight: bold;
   background-color: #1A8CD8;
   /* padding: 2px; */
+
   cursor: pointer;
   border-radius: 50px;
   width: 90px;
