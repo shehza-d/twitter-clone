@@ -23,9 +23,10 @@
 } */
 
 @media only screen and (max-width: 450px) {
-  .posts>p {
+  /* .posts>p {
     background-color: red;
-  }
+  } */
+
 }
 
 
@@ -185,6 +186,25 @@
   margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
+}
+
+.actionBtn>i {
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.actionBtn>i:nth-child(2):hover {
+  background-color: rgba(36, 240, 18, 0.397);
+}
+
+.actionBtn>i:nth-child(3):hover {
+  background-color: rgba(236, 10, 67, 0.397);
+}
+
+.actionBtn>i:hover {
+  cursor: pointer;
+  background-color: rgba(10, 100, 236, 0.397);
+  /* fill: #1A8CD8; */
 }
 
 .postImg {

@@ -18,7 +18,7 @@ const Menubar = () => {
 				<li><button><BsBookmark />Bookmarks</button></li >
 				<li><button><IoPersonOutline />Profile</button></li >
 				<li><button><CgMoreO />More</button></li >
-				<li><button className="tweetBtn">Tweet</button></li>
+				<li ><button className="tweetBtn" >Tweet</button></li>
 			</ul >
 			<div className="myProfile">
 				<img src="https://pbs.twimg.com/profile_images/1519059538556723203/ouFwv4wv_400x400.jpg" alt="twitter DP" width={50} />
