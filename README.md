@@ -1,2 +1,2 @@
-# facebook-clone
-An clone app of Facebook
+# twitter-clone
+An clone app of Twitter
