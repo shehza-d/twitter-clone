@@ -7,13 +7,12 @@ import { useState } from 'react';
 const App = () => {
   // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');nnif (prefersDarkScheme.matches) {n  document.body.classList.add('dark-theme');n} else {n  document.body.classList.remove('dark-theme');n}
   const [themeMode, setThemeMode] = useState("dark")
+
   const toggleThemeMode = () => {
     if (themeMode === "dark") {
     setThemeMode("light")
-    document.body.style.backgroundColor = 'white';
     }
     else{
-      document.body.style.backgroundColor = 'black';
     setThemeMode("dark")
     }
     // console.log(themeMode)
