@@ -1,18 +1,15 @@
 /* .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -21,31 +18,34 @@
     transform: rotate(360deg);
   }
 } */
-
 @media only screen and (max-width: 450px) {
   /* .posts>p {
     background-color: red;
   } */
+}
+
+.dark {
+  --bg-color: rgb(21, 32, 43);
+  --main-color: white;
+  --twitter-color: #1A8CD8;
+  --lightGray-color: #273340;
 
 }
 
-.dark{
-  
-  background-color: rgb(21,32,43) ;
-  /* color: red; */
-}
-.light{
-  background-color: rgb(255, 255, 255);
-  color: black;
+.light {
+  --bg-color: rgb(247, 247, 247);
+  --main-color: black;
+  --twitter-color: #1A8CD8;
+  --lightGray-color: #E7E7E8;
 }
 
-/* .dark{
-} */
 .App {
   display: flex;
   height: 100vh;
   width: 100vw;
-  /* background-color: rgb(21,32,43); */
+  background-color: var(--bg-color);
+  color: var(--main-color);
+  transition: 1s;
   margin: 0;
   padding: 0;
 }
@@ -61,7 +61,6 @@
   /* flex: 1; */
   width: 30vw;
   position: sticky;
-
 }
 
 .content {
@@ -73,28 +72,27 @@
   /* flex: 2; */
   border-left: 2px solid grey;
   border-right: 2px solid grey;
-  
 
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 0;
 }
-
 
 .siderbar {
   /* background-color: purple; */
   height: 100vh;
   /* flex: 1; */
   width: 30vw;
- transition: 3s;
+  /* transition: 3s; */
 }
- /* .siderbar>button {
-  transition: 3s;
-  transition-delay: 3s; */
-  /* transform: 1s; */
-  /* transform: scale(1.1); */
 
- /* background-color: red; */
+/* .siderbar>button { */
+/* transition: 5s; */
+/* transition-delay: 7s; */
+/* transform: 1s; */
+/* transform: scale(1.1); */
+/* background-color: red; */
 /* }  */
 
 
@@ -116,7 +114,7 @@
 }
 
 /* .header>span { */
-  /* padding: 5px;
+/* padding: 5px;
   padding-top: 8px;
   font-weight: 600;
   font-size: 20px;
@@ -130,20 +128,32 @@
 /* .menubar>ul>li {
 } */
 .menubar>ul>li>button {
-  padding: 15px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 25px;
   margin: 5px;
   border: none;
   border-radius: 50px;
   text-decoration: none;
-
+  transition: 1s;
   cursor: pointer;
-  color: white;
-  background-color: grey;
+  border: 1px solid gray;
+  font-size: 20px;
+  color: var(--main-color);
+  background-color: var(--bg-color);
 }
 
-/* .menubar>ul>li>button:hover {}
-.menubar>ul>li>button:active {}
-.menubar>ul>li>button {} */
+.menubar>ul>li>button:hover {
+  background-color: var(--lightGray-color) ;
+  opacity: 0.8;
+}
+
+.menubar>ul>li>button:active {
+  /* color: red; */
+  font-weight: 600;
+}
+
+/* .menubar>ul>li>button {} */
 
 .myProfileContainer {
   margin-top: 50px;
@@ -190,8 +200,8 @@
 .postOptions>button {
   border: none;
   font-weight: bold;
-  background-color: #1A8CD8;
-  /* color: rgb(29, 155, 240); */
+  background-color: var(--twitter-color);
+  color: white;
   /* padding: 2px; */
   cursor: pointer;
   border-radius: 50px;
@@ -201,7 +211,7 @@
 .tweetBtn {
   border: none;
   font-weight: bold;
-  background-color: #1A8CD8;
+  background-color: var(--twitter-color);
   /* padding: 2px; */
 
   cursor: pointer;
@@ -210,8 +220,8 @@
 }
 
 .posts {
-  border-top: 2px solid white;
-  border-bottom: 2px solid white;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
 }
 
 .posts>p {
@@ -224,7 +234,7 @@
   margin-bottom: 10px;
   display: flex;
   justify-content: space-around;
- 
+
 }
 
 .actionBtn>i {
@@ -251,4 +261,55 @@
   border: 2px solid grey;
   border-radius: 5%;
   text-align: right;
+}
+
+
+
+/* sidebar css start */
+.siderbar>button {
+  margin: 10px;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  border-radius: 50%;
+  border-style: none;
+  border: none;
+  background-color: var(--bg-color);
+  color: var(--main-color);
+  transition: 1s;
+  border: 1px solid gray;
+}
+
+.siderbar>button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+.searchBar{
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 85%; */
+  border-radius: 50px;
+  background-color:   var(--lightGray-color);
+  transition: 1s;
+
+
+
+  border: 2px solid red;
+
+}
+.searchBar>input {
+  padding: 10px;
+  width: 75%;
+  background-color:  var(--lightGray-color);
+
+
+  color: var(--main-color);
+  transition: 1s;
+  border: none;
+  outline: none;
+
 }
