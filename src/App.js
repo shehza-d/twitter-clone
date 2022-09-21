@@ -17,6 +17,8 @@ const App = () => {
     }
     // console.log(themeMode)
   }
+
+  
   return (
     <div className={`App ${themeMode==="dark"?"dark":"light"}`}  >
       <Menubar />

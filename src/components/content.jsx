@@ -1,8 +1,19 @@
 import Posts from './post';
 import { BsStars } from "react-icons/bs";
+import { useEffect } from 'react';
+import axios from 'axios';
 // import HomeSvg from '../img/home.svg';
 
 const Content = () => {
+
+	
+//json placeholder
+//jo chez state variable ma ho gyi wohi display ho gyi aur kuxh bhi display nhi hoga
+//khali array per map nhi kam karta
+
+
+//make weather app on react
+//apply router on twitter and call api on twitter
 	return (
 		<div className="content">
 			<header className="header">

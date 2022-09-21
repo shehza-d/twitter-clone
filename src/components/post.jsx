@@ -4,7 +4,25 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
 
 const Posts = () => {
+
+
+	const [posts, setPosts]= useState([]);
+
+	useEffect{ ()=>{
+		axios.get("https://my-json-server.typicode.com/minzamammalik/jsonplaceholder/posts").then(response=>console.log("response: ", response))
+			 .catch(error=>console.log("error: ", error))
+	},[]}
+
+
+
 	return (
+
+		{
+			post
+		}
+
+
+
 		<div className="posts">
 			<div className="flex">
 				<img className="profilePhoto" src="https://pbs.twimg.com/profile_images/1519059538556723203/ouFwv4wv_400x400.jpg" alt="userDP" />
