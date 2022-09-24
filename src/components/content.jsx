@@ -6,14 +6,6 @@ import axios from 'axios';
 
 const Content = () => {
 
-	
-//json placeholder
-//jo chez state variable ma ho gyi wohi display ho gyi aur kuxh bhi display nhi hoga
-//khali array per map nhi kam karta
-
-
-//make weather app on react
-//apply router on twitter and call api on twitter
 	return (
 		<div className="content">
 			<header className="header">
