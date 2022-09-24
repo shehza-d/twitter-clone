@@ -1,7 +1,7 @@
 import Posts from './post';
 import { BsStars } from "react-icons/bs";
 import { useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 // import HomeSvg from '../img/home.svg';
 
 const Content = () => {

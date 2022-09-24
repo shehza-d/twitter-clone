@@ -6,20 +6,20 @@ import { IoHeartOutline } from "react-icons/io5";
 const Posts = () => {
 
 
-	const [posts, setPosts]= useState([]);
+	// const [posts, setPosts]= useState([]);
 
-	useEffect{ ()=>{
-		axios.get("https://my-json-server.typicode.com/minzamammalik/jsonplaceholder/posts").then(response=>console.log("response: ", response))
-			 .catch(error=>console.log("error: ", error))
-	},[]}
+	// useEffect{ ()=>{
+	// 	axios.get("https://my-json-server.typicode.com/minzamammalik/jsonplaceholder/posts").then(response=>console.log("response: ", response))
+	// 		 .catch(error=>console.log("error: ", error))
+	// },[]}
 
 
 
 	return (
 
-		{
-			post
-		}
+		// {
+		// 	post
+		// }
 
 
 
