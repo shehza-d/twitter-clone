@@ -3,7 +3,7 @@ import { FiShare } from "react-icons/fi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
 
-const Posts = () => {
+const Posts = (props) => {
 
 
 	// const [posts, setPosts]= useState([]);
@@ -16,12 +16,6 @@ const Posts = () => {
 
 
 	return (
-
-		// {
-		// 	post
-		// }
-
-
 
 		<div className="posts">
 			<div className="flex">

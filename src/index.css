@@ -8,3 +8,11 @@ body {
   /* background-color: #15202B; */
   color: white;
 }
+/* @media screen and (max-width: 480px) {
+  @media only screen and (max-width: 450px) {
+    .menubar{
+      border-radius: 5px solid red;
+      color: red;
+      display: hidden;
+    }
+  } */

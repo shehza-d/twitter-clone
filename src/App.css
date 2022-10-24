@@ -18,11 +18,7 @@
     transform: rotate(360deg);
   }
 } */
-@media only screen and (max-width: 450px) {
-  /* .posts>p {
-    background-color: red;
-  } */
-}
+
 
 .dark {
   --bg-color: rgb(21, 32, 43);
@@ -313,3 +309,15 @@
   outline: none;
 
 }
+@media screen and (max-width: 480px) {
+  /* @media only screen and (max-width: 450px) { */
+    .menubar{
+      /* border-radius: 5px solid red;
+      color: red; */
+      display: none;
+    }
+    .siderbar{
+      display: none;
+      /* visibility: hidden; */
+    }
+  }

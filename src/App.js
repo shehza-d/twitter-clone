@@ -1,4 +1,5 @@
 import './App.css';
+// import './index.css'
 import Content from './components/content';
 import Sidebar from './components/sidebar';
 import Menubar from './components/menubar';
