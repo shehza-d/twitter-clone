@@ -309,6 +309,10 @@
   outline: none;
 
 }
+.userNameDiv{
+  display:flex;
+  flex-direction: column;
+}
 
 @media screen and (max-width: 430px) {
   /* @media only screen and (max-width: 450px) { */

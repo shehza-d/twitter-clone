@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 
 // import axios from 'axios';
 // import HomeSvg from '../img/home.svg';
@@ -34,13 +42,26 @@ const Content = () => {
   const [postText, setPostText] = useState("Testing Lorem");
 
   useEffect(() => {
-    (async () => {
-      const querySnapshot = await getDocs(collection(db, "posts"));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} =>`, doc.data());
-        setPosts((perviousValue)=>[...perviousValue, doc.data()]);
+    // (async () => {
+    //   const querySnapshot = await getDocs(collection(db, "posts"));
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(`${doc.id} =>`, doc.data());
+    //     setPosts((perviousValue)=>[...perviousValue, doc.data()]);
+    //   });
+    // })();
+
+    const getRealTimeData = () => {
+      const q = query(collection(db, "posts"));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const posts = [];
+        querySnapshot.forEach((doc) => { 
+          posts.push(doc.data());
+        });
+        setPosts(posts)
+        console.log("posts", posts);
       });
-    })();
+    };
+    getRealTimeData();
   }, []);
 
   const savePost = async (e) => {
@@ -100,12 +121,12 @@ const Content = () => {
 
       {posts?.map((eachPost, i) => (
         <Posts
-          key={eachPost?.createdOn}
+          key={i}
           // name={eachPost?.name}
           postText={eachPost?.text}
           // profilePhoto={eachPost?.profilePhoto}
           // postImage="https://cdn.motor1.com/images/mgl/mrz1e/s3/coolest-cars-feature.jpg"
-          // postDate={eachPost?.postDate}
+          postDate={eachPost?.createdOn}
         />
       ))}
       {/* <Posts />
