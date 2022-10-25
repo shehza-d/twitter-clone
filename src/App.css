@@ -309,7 +309,8 @@
   outline: none;
 
 }
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 430px) {
   /* @media only screen and (max-width: 450px) { */
     .menubar{
       /* border-radius: 5px solid red;
@@ -318,6 +319,13 @@
     }
     .siderbar{
       display: none;
+      /* color: red; */
       /* visibility: hidden; */
+    }
+    .header{
+      width: 100vw;
+    }
+    .content {
+    width: 100vw;
     }
   }
