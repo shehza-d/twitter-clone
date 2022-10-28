@@ -12,6 +12,11 @@ import {
   doc,
   onSnapshot,
   query,
+  serverTimestamp,
+  orderBy,
+  deleteDoc,
+  updateDoc,
+  limit,
 } from "firebase/firestore";
 
 // import axios from 'axios';
@@ -40,6 +45,12 @@ const db = getFirestore(app);
 const Content = () => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("Testing Lorem");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [editing, setEditing] = useState({
+    editingId: null,
+    editingText: "",
+  });
 
   useEffect(() => {
     // (async () => {
@@ -50,18 +61,28 @@ const Content = () => {
     //   });
     // })();
 
+    let unsubscribe;
     const getRealTimeData = () => {
-      const q = query(collection(db, "posts"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const q = query(
+        collection(db, "posts"),
+        orderBy("createdOn", "desc"),
+        limit(60)
+      );
+      unsubscribe = onSnapshot(q, (querySnapshot) => {
         const posts = [];
-        querySnapshot.forEach((doc) => { 
+        querySnapshot.forEach((doc) => {
           posts.push(doc.data());
         });
-        setPosts(posts)
+        setPosts(posts);
         console.log("posts", posts);
       });
     };
     getRealTimeData();
+
+    //this is useEffect cleanup and is called when i leave this useEffect
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const savePost = async (e) => {
@@ -69,13 +90,33 @@ const Content = () => {
     try {
       const docRef = await addDoc(collection(db, "posts"), {
         text: postText,
-        createdOn: new Date().getTime(),
+        createdOn: serverTimestamp(),
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
+
+  const deletePost = async (postId) => {
+    console.log("postId: ", postId);
+
+    await deleteDoc(doc(db, "posts", postId));
+  };
+
+  const updatePost = async (e) => {
+    e.preventDefault();
+
+    await updateDoc(doc(db, "posts", editing.editingId), {
+      text: editing.editingText,
+    });
+
+    setEditing({
+      editingId: null,
+      editingText: "",
+    });
+  };
+
   return (
     <div className="content">
       <header className="header">
@@ -121,6 +162,8 @@ const Content = () => {
 
       {posts?.map((eachPost, i) => (
         <Posts
+          updatePost={updatePost}
+          deletePost={deletePost}
           key={i}
           // name={eachPost?.name}
           postText={eachPost?.text}

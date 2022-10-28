@@ -167,6 +167,7 @@
 }
 
 .postInput {
+  color: red;
   background-color: transparent;
   border: none;
 }

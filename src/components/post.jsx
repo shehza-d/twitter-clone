@@ -1,7 +1,9 @@
 import { FaRegComment } from "react-icons/fa";
-import { FiShare } from "react-icons/fi";
+import { FiShare,FiEdit } from "react-icons/fi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
+import { MdDeleteForever } from "react-icons/md";
+
 
 const Posts = (props) => {
   // const [posts, setPosts]= useState([]);
@@ -23,6 +25,8 @@ const Posts = (props) => {
           <span>Your Username</span>
           <span>{props?.postDate}</span>
         </div>
+       <button onClick={props.updatePost}><FiEdit/></button>
+       <button onClick={props.deletePost}><MdDeleteForever/></button>
       </div>
       <p>{props?.postText}</p>
       <br />
