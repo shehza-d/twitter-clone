@@ -1,17 +1,69 @@
 import { FaRegComment } from "react-icons/fa";
-import { FiShare,FiEdit } from "react-icons/fi";
+import { FiShare, FiEdit } from "react-icons/fi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
 
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  orderBy,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDSFR44NqKejUJV8TKLhlAOD63wQ4bpOGM",
+  authDomain: "twetterdb.firebaseapp.com",
+  projectId: "twetterdb",
+  storageBucket: "twetterdb.appspot.com",
+  messagingSenderId: "494029255747",
+  appId: "1:494029255747:web:44e7e0908cf662afa490f6",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 
 const Posts = (props) => {
   // const [posts, setPosts]= useState([]);
-
+  const [editing, setEditing] = useState({
+    editingId: null,
+    editingText: "",
+  });
   // useEffect{ ()=>{
   // 	axios.get("https://my-json-server.typicode.com/minzamammalik/jsonplaceholder/posts").then(response=>console.log("response: ", response))
   // 		 .catch(error=>console.log("error: ", error))
   // },[]}
+
+  const deletePost = async () => {
+    console.log("postId: ", props.id);
+
+    await deleteDoc(doc(db, "posts", props.id));
+  };
+
+  const updatePost = async (e) => {
+    e.preventDefault();
+
+    await updateDoc(doc(db, "posts", editing.editingId), {
+      text: editing.editingText,
+    });
+
+    setEditing({
+      editingId: null,
+      editingText: "",
+    });
+  };
 
   return (
     <div className="posts">
@@ -23,12 +75,48 @@ const Posts = (props) => {
         />
         <div className="userNameDiv">
           <span>Your Username</span>
-          <span>{props?.postDate}</span>
+          {/* <span>{props?.postDate}</span> */}
+          {/* {console.log(props?.postDate)} */}
         </div>
-       <button onClick={props.updatePost}><FiEdit/></button>
-       <button onClick={props.deletePost}><MdDeleteForever/></button>
+        <button onClick={() => deletePost(props.id)}>
+          <MdDeleteForever />
+        </button>
+
+        {editing.editingId === props?.id ? null : (
+          <button
+            onClick={() => {
+              setEditing({
+                editingId: props?.id,
+                editingText: props?.postText,
+              });
+            }}
+          >
+            <FiEdit />
+          </button>
+        )}
       </div>
-      <p>{props?.postText}</p>
+
+      {props.id === editing.editingId ? (
+        <form onSubmit={updatePost}>
+          <input
+            type="text"
+            value={editing.editingText}
+            onChange={(e) => {
+              setEditing({
+                ...editing,
+                editingText: e.target.value,
+              });
+            }}
+            placeholder="please enter updated value"
+          />
+          <button type="submit">Update</button>
+        </form>
+      ) : (
+        <p className="post" target="_blank" rel="noreferrer">
+          {props?.postText}
+        </p>
+      )}
+
       <br />
       {/* <img className='postImg' src="https://pbs.twimg.com/media/Fci88JXXoAAhV2G?format=jpg&name=small" alt="twitterImg" /> */}
       <div className="actionBtn">

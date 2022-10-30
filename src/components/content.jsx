@@ -44,13 +44,13 @@ const db = getFirestore(app);
 
 const Content = () => {
   const [posts, setPosts] = useState([]);
-  const [postText, setPostText] = useState("Testing Lorem");
+  const [postText, setPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const [editing, setEditing] = useState({
-    editingId: null,
-    editingText: "",
-  });
+  // const [editing, setEditing] = useState({
+  //   editingId: null,
+  //   editingText: "",
+  // });
 
   useEffect(() => {
     // (async () => {
@@ -62,7 +62,7 @@ const Content = () => {
     // })();
 
     let unsubscribe;
-    const getRealTimeData = () => {
+    const getRealTimeData = async () => {
       const q = query(
         collection(db, "posts"),
         orderBy("createdOn", "desc"),
@@ -71,7 +71,8 @@ const Content = () => {
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         const posts = [];
         querySnapshot.forEach((doc) => {
-          posts.push(doc.data());
+          posts.push({ id: doc.id, ...doc.data() });
+          // console.log({ id: doc.id, ...doc.data() })
         });
         setPosts(posts);
         console.log("posts", posts);
@@ -96,25 +97,6 @@ const Content = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  };
-
-  const deletePost = async (postId) => {
-    console.log("postId: ", postId);
-
-    await deleteDoc(doc(db, "posts", postId));
-  };
-
-  const updatePost = async (e) => {
-    e.preventDefault();
-
-    await updateDoc(doc(db, "posts", editing.editingId), {
-      text: editing.editingText,
-    });
-
-    setEditing({
-      editingId: null,
-      editingText: "",
-    });
   };
 
   return (
@@ -162,15 +144,18 @@ const Content = () => {
 
       {posts?.map((eachPost, i) => (
         <Posts
-          updatePost={updatePost}
-          deletePost={deletePost}
+          // updatePost={updatePost}
+          // deletePost={deletePost}
           key={i}
+          // name={eachPost?.name}
+          id={eachPost?.id}
           // name={eachPost?.name}
           postText={eachPost?.text}
           // profilePhoto={eachPost?.profilePhoto}
           // postImage="https://cdn.motor1.com/images/mgl/mrz1e/s3/coolest-cars-feature.jpg"
           postDate={eachPost?.createdOn}
         />
+          
       ))}
       {/* <Posts />
       <Posts />
