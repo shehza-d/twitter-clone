@@ -55,7 +55,7 @@
   /* background-color: green; */
   height: 100vh;
   /* flex: 1; */
-  width: 30vw;
+  width: 24vw;
   position: sticky;
 }
 
@@ -64,7 +64,7 @@
   /* height: 100vh; */
   /* overflow: visible; */
   overflow-y: scroll;
-  width: 40vw;
+  width: 48vw;
   /* flex: 2; */
   border-left: 2px solid grey;
   border-right: 2px solid grey;
@@ -79,7 +79,7 @@
   /* background-color: purple; */
   height: 100vh;
   /* flex: 1; */
-  width: 30vw;
+  width: 32vw;
   /* transition: 3s; */
 }
 

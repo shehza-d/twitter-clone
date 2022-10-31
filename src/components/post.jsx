@@ -3,22 +3,10 @@ import { FiShare, FiEdit } from "react-icons/fi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { initializeApp } from "firebase/app";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  onSnapshot,
-  query,
-  serverTimestamp,
-  orderBy,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import moment from "moment";
+import { getFirestore, doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDSFR44NqKejUJV8TKLhlAOD63wQ4bpOGM",
@@ -76,7 +64,13 @@ const Posts = (props) => {
         <div className="userNameDiv">
           <span>Your Username</span>
           {/* <span>{props?.postDate}</span> */}
-          {/* {console.log(props?.postDate)} */}
+          {/* {console.log(props?.postDate?.seconds)} */}
+          <span>
+            {moment(props?.postDate?.seconds * 1000 || undefined)
+              .fromNow()
+            }
+              {/* .format("D MMM, h:mm a") */}
+          </span>
         </div>
         <button onClick={() => deletePost(props.id)}>
           <MdDeleteForever />

@@ -1,12 +1,6 @@
 import Posts from "./post";
-import { BsStars,BsImage } from "react-icons/bs";
+import { BsStars } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { IoImageOutline } from "react-icons/io5";
-import { AiOutlineFileGif } from "react-icons/ai";
-import { BiPoll } from "react-icons/bi";
-import { TbMoodCrazyHappy } from "react-icons/tb";
-import { GrSchedulePlay } from "react-icons/gr";
-import { MdOutlineAddLocationAlt } from "react-icons/md";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -52,6 +46,11 @@ const Content = () => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // const [editing, setEditing] = useState({
+  //   editingId: null,
+  //   editingText: "",
+  // });
 
   useEffect(() => {
     // (async () => {
@@ -128,12 +127,12 @@ const Content = () => {
           </div>
           <div className="postOptions">
             <ul>
-              <li><BsImage/><IoImageOutline/></li>
-              <li><AiOutlineFileGif/></li>
-              <li><BiPoll/></li>
-              <li><TbMoodCrazyHappy/></li>
-              <li><GrSchedulePlay/></li>
-              <li><MdOutlineAddLocationAlt/></li>
+              <li><BsImage/></li>
+              <li>O</li>
+              <li>O</li>
+              <li>O</li>
+              <li>O</li>
+              <li>O</li>
             </ul>
             <button type="submit">Tweet</button>
           </div>
