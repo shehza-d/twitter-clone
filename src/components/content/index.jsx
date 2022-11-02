@@ -148,7 +148,9 @@ const Content = () => {
                 <MdOutlineAddLocationAlt />
               </li>
             </ul>
-            <button type="submit" className="tweetBtn">Tweet</button>
+            <button type="submit" className="tweetBtn">
+              Tweet
+            </button>
           </div>
         </form>
       </div>
