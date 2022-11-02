@@ -1,4 +1,4 @@
-import Posts from "./";
+import Posts from "../post";
 import { BsStars, BsImage } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
@@ -52,6 +52,11 @@ const Content = () => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // const [editing, setEditing] = useState({
+  //   editingId: null,
+  //   editingText: "",
+  // });
 
   useEffect(() => {
     // (async () => {
@@ -108,9 +113,11 @@ const Content = () => {
           <BsStars />
         </i>
       </header>
+
       <div className="myProfileContainer">
         <form onSubmit={savePost}>
           <div className="flex">
+
             <a href="https://twitter.com/Shehza_d_">
               <img
                 className="profilePhoto"
@@ -119,12 +126,14 @@ const Content = () => {
               />
             </a>
 
+
             <input
               className="postInput"
               type="text"
               placeholder="What's Happening?"
               onChange={(e) => setPostText(e.target.value)}
             />
+
           </div>
           <div className="postOptions">
             <ul>
@@ -160,7 +169,10 @@ const Content = () => {
 
       {posts?.map((eachPost, i) => (
         <Posts
+          // updatePost={updatePost}
+          // deletePost={deletePost}
           key={i}
+          // name={eachPost?.name}
           id={eachPost?.id}
           // name={eachPost?.name}
           postText={eachPost?.text}
@@ -168,7 +180,11 @@ const Content = () => {
           // postImage="https://cdn.motor1.com/images/mgl/mrz1e/s3/coolest-cars-feature.jpg"
           postDate={eachPost?.createdOn}
         />
+
       ))}
+      {/* <Posts />
+      <Posts />
+      <Posts /> */}
     </div>
   );
 };

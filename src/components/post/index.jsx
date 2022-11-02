@@ -63,13 +63,9 @@ const Posts = (props) => {
         />
         <div className="userNameDiv">
           <span>Your Username</span>
-          {/* <span>{props?.postDate}</span> */}
-          {/* {console.log(props?.postDate?.seconds)} */}
+         
           <span>
-            {moment(props?.postDate?.seconds * 1000 || undefined)
-              .fromNow()
-            }
-              {/* .format("D MMM, h:mm a") */}
+            {moment((props?.postDate?.seconds * 1000) || undefined).fromNow()}
           </span>
         </div>
         <button onClick={() => deletePost(props.id)}>
