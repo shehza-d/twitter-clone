@@ -99,9 +99,12 @@ const Posts = (props) => {
         </p>
       )}
 
-      <br />
-      <img className="postImg" src={props?.postImage} alt="twitterImg" />
-    
+      {props?.postImage ? (
+        <img className="postImg" src={props?.postImage} alt="twitterImg" />
+      ) : (
+        ""
+      )}
+
       <div className="actionBtn">
         <i>
           <FaRegComment />

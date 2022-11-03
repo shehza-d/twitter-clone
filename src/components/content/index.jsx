@@ -7,7 +7,7 @@ import { BiPoll } from "react-icons/bi";
 import { TbMoodCrazyHappy } from "react-icons/tb";
 import { GrSchedulePlay } from "react-icons/gr";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
-
+import { MdAddAPhoto } from "react-icons/md";
 import axios from "axios";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -157,16 +157,20 @@ const Content = () => {
               placeholder="What's Happening?"
               onChange={(e) => setPostText(e.target.value)}
             />
-            <input
-              className="imgInput"
-              type="file"
-              name="postpicture"
-              accept="image/*"
-              onChange={(e) => {
-                console.log(e.currentTarget.files[0]);
-                setPic(e.currentTarget.files[0]);
-              }}
-            />
+            <label name="postpicture">
+              <input
+                className="imgInput"
+                type="file"
+                name="postpicture"
+                accept="image/*"
+                placeholder="dg"
+                onChange={(e) => {
+                  console.log(e.currentTarget.files[0]);
+                  setPic(e.currentTarget.files[0]);
+                }}
+              />
+              <MdAddAPhoto />
+            </label>
           </div>
           <div className="postOptions">
             <ul>
