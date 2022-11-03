@@ -24,21 +24,13 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const Posts = (props) => {
-  // const [posts, setPosts]= useState([]);
   const [editing, setEditing] = useState({
     editingId: null,
     editingText: "",
   });
-  // useEffect{ ()=>{
-  // 	axios.get("https://my-json-server.typicode.com/minzamammalik/jsonplaceholder/posts").then(response=>console.log("response: ", response))
-  // 		 .catch(error=>console.log("error: ", error))
-  // },[]}
 
-  const deletePost = async () => {
-    console.log("postId: ", props.id);
-
-    await deleteDoc(doc(db, "posts", props.id));
-  };
+  const deletePost = async () => await deleteDoc(doc(db, "posts", props.id));
+  // console.log("postId: ", props.id);
 
   const updatePost = async (e) => {
     e.preventDefault();
@@ -63,9 +55,9 @@ const Posts = (props) => {
         />
         <div className="userNameDiv">
           <span>Your Username</span>
-         
+
           <span>
-            {moment((props?.postDate?.seconds * 1000) || undefined).fromNow()}
+            {moment(props?.postDate?.seconds * 1000 || undefined).fromNow()}
           </span>
         </div>
         <button onClick={() => deletePost(props.id)}>
@@ -108,7 +100,7 @@ const Posts = (props) => {
       )}
 
       <br />
-      {/* <img className='postImg' src="https://pbs.twimg.com/media/Fci88JXXoAAhV2G?format=jpg&name=small" alt="twitterImg" /> */}
+      <img className="postImg" src={props.postImage} alt="twitterImg" />
       <div className="actionBtn">
         <i>
           <FaRegComment />

@@ -8,6 +8,7 @@ import { TbMoodCrazyHappy } from "react-icons/tb";
 import { GrSchedulePlay } from "react-icons/gr";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 
+import axios from "axios";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
@@ -44,7 +45,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
@@ -52,11 +52,7 @@ const Content = () => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  // const [editing, setEditing] = useState({
-  //   editingId: null,
-  //   editingText: "",
-  // });
+  const [pic, setPic] = useState(null);
 
   useEffect(() => {
     // (async () => {
@@ -68,7 +64,7 @@ const Content = () => {
     // })();
 
     let unsubscribe;
-    const getRealTimeData = async () => {
+    (() => {
       const q = query(
         collection(db, "posts"),
         orderBy("createdOn", "desc"),
@@ -83,8 +79,7 @@ const Content = () => {
         setPosts(posts);
         console.log("posts", posts);
       });
-    };
-    getRealTimeData();
+    })();
 
     //this is useEffect cleanup and is called when i leave this useEffect
     return () => {
@@ -94,17 +89,41 @@ const Content = () => {
 
   const savePost = async (e) => {
     e.preventDefault();
-    try {
-      const docRef = await addDoc(collection(db, "posts"), {
-        text: postText,
-        createdOn: serverTimestamp(),
-      });
-      // console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+    //pix/
 
+    const cloudinaryData = new FormData();
+    cloudinaryData.append("file", pic);
+    cloudinaryData.append("upload_preset", "shehzadPosting ");
+    cloudinaryData.append("cloud_name", "deh1sqok6");
+    console.log(cloudinaryData);
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/deh1sqok6/image/upload`,
+        cloudinaryData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      )
+      .then(async (res) => {
+        console.log("from then", res.data);
+        console.log("postText", postText);
+
+        //pic/
+        try {
+          const docRef = await addDoc(collection(db, "posts"), {
+            text: postText,
+            img: res?.data?.url,
+            createdOn: serverTimestamp(),
+          });
+          // console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      })
+      .catch((err) => {
+        console.log("from catch", err);
+      });
+  };
   return (
     <div className="content">
       <header className="header">
@@ -117,7 +136,6 @@ const Content = () => {
       <div className="myProfileContainer">
         <form onSubmit={savePost}>
           <div className="flex">
-
             <a href="https://twitter.com/Shehza_d_">
               <img
                 className="profilePhoto"
@@ -126,14 +144,22 @@ const Content = () => {
               />
             </a>
 
-
             <input
               className="postInput"
               type="text"
               placeholder="What's Happening?"
               onChange={(e) => setPostText(e.target.value)}
             />
-
+            <input
+              className="imgInput"
+              type="file"
+              name="postpicture"
+              accept="image/*"
+              onChange={(e) => {
+                console.log(e.currentTarget.files[0]);
+                setPic(e.currentTarget.files[0]);
+              }}
+            />
           </div>
           <div className="postOptions">
             <ul>
@@ -164,27 +190,17 @@ const Content = () => {
         </form>
       </div>
 
-      {/* <Posts postText={posts?.text} /> */}
-      {/* <Posts postText={postText} /> */}
-
       {posts?.map((eachPost, i) => (
         <Posts
-          // updatePost={updatePost}
-          // deletePost={deletePost}
           key={i}
-          // name={eachPost?.name}
           id={eachPost?.id}
           // name={eachPost?.name}
           postText={eachPost?.text}
           // profilePhoto={eachPost?.profilePhoto}
-          // postImage="https://cdn.motor1.com/images/mgl/mrz1e/s3/coolest-cars-feature.jpg"
+          postImage={eachPost?.img}
           postDate={eachPost?.createdOn}
         />
-
       ))}
-      {/* <Posts />
-      <Posts />
-      <Posts /> */}
     </div>
   );
 };
