@@ -52,7 +52,7 @@ const Content = () => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [pic, setPic] = useState(null);
+  const [pic, setPic] = useState(undefined);
 
   useEffect(() => {
     // (async () => {
@@ -90,7 +90,19 @@ const Content = () => {
   const savePost = async (e) => {
     e.preventDefault();
     //pix/
-
+    if (!pic) {
+      try {
+        const docRef = await addDoc(collection(db, "posts"), {
+          text: postText,
+          createdOn: serverTimestamp(),
+        });
+        // console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      return;
+    }
+    //pic/
     const cloudinaryData = new FormData();
     cloudinaryData.append("file", pic);
     cloudinaryData.append("upload_preset", "shehzadPosting ");
@@ -106,9 +118,6 @@ const Content = () => {
       )
       .then(async (res) => {
         console.log("from then", res.data);
-        console.log("postText", postText);
-
-        //pic/
         try {
           const docRef = await addDoc(collection(db, "posts"), {
             text: postText,
@@ -120,9 +129,7 @@ const Content = () => {
           console.error("Error adding document: ", e);
         }
       })
-      .catch((err) => {
-        console.log("from catch", err);
-      });
+      .catch((err) => console.log("from catch err", err));
   };
   return (
     <div className="content">
