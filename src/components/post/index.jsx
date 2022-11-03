@@ -3,6 +3,7 @@ import { FiShare, FiEdit } from "react-icons/fi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { IoHeartOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
+import { CgOptions } from "react-icons/cg";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import moment from "moment";
@@ -28,21 +29,22 @@ const Posts = (props) => {
     editingId: null,
     editingText: "",
   });
+  const [dropDown, setDropDown] = useState(false);
 
   const deletePost = async () => await deleteDoc(doc(db, "posts", props.id));
   // console.log("postId: ", props.id);
 
   const updatePost = async (e) => {
+    setDropDown(false);
     e.preventDefault();
-
     await updateDoc(doc(db, "posts", editing.editingId), {
       text: editing.editingText,
     });
-
     setEditing({
       editingId: null,
       editingText: "",
     });
+    setDropDown(false);
   };
 
   return (
@@ -60,11 +62,35 @@ const Posts = (props) => {
             {moment(props?.postDate?.seconds * 1000 || undefined).fromNow()}
           </span>
         </div>
-        <button onClick={() => deletePost(props.id)}>
-          <MdDeleteForever />
+        <button onClick={() => setDropDown(!dropDown)}>
+          <CgOptions />
         </button>
+        {dropDown ? (
+          <ul className="menu">
+            <li className="menu-item">
+              <button
+                onClick={() => {
+                  setDropDown(false);
+                  setEditing({
+                    editingId: props?.id,
+                    editingText: props?.postText,
+                  });
+                }}
+              >
+                Edit Post <FiEdit />
+              </button>
+            </li>
+            <li className="menu-item">
+              <button onClick={() => deletePost(props.id)}>
+                Delete Post <MdDeleteForever />
+              </button>
+            </li>
+          </ul>
+        ) : (
+          ""
+        )}
 
-        {editing.editingId === props?.id ? null : (
+        {/*         {editing.editingId === props?.id ? null : (
           <button
             onClick={() => {
               setEditing({
@@ -75,7 +101,7 @@ const Posts = (props) => {
           >
             <FiEdit />
           </button>
-        )}
+        )} */}
       </div>
 
       {props.id === editing.editingId ? (

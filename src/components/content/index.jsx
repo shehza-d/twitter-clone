@@ -1,4 +1,5 @@
 import Posts from "../post";
+import './style.css'
 import { BsStars, BsImage } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
@@ -157,11 +158,11 @@ const Content = () => {
               placeholder="What's Happening?"
               onChange={(e) => setPostText(e.target.value)}
             />
-            <label name="postpicture">
+            <label name="postPicture">
               <input
                 className="imgInput"
                 type="file"
-                name="postpicture"
+                name="postPicture"
                 accept="image/*"
                 placeholder="dg"
                 onChange={(e) => {
