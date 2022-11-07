@@ -54,12 +54,6 @@ const Login = () => {
       <br />
       <br />
 
-      <div className="routerNavBtns">
-        <Link to="/">Home</Link>
-        <Link to="/login">LogIn</Link>
-        <Link to="/signup">SignUp</Link>
-      </div>
-
       <form className="form" onSubmit={handleSubmit}>
         <div className="title">Welcome Back to Login</div>
         <br />
@@ -73,7 +67,7 @@ const Login = () => {
             type="email"
             placeholder=" "
             name="email"
-            autoComplete="off"
+            autoComplete="on"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -96,7 +90,7 @@ const Login = () => {
             type="password"
             placeholder=" "
             name="password"
-            autoComplete="off"
+            autoComplete="on"
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}

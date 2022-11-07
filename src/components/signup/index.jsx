@@ -1,3 +1,7 @@
+
+
+
+
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -308,3 +312,238 @@ const Signup = () => {
 };
 
 export default Signup;
+
+
+
+////////////////////////////////////////////////////////////
+
+
+
+
+// import { Link } from "react-router-dom";
+// import { useFormik } from "formik";
+// import * as yup from "yup";
+// import "./index.css";
+// import { useState } from "react";
+// import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
+
+// // const initialValues = {
+// // 	name: "",
+// // 	email: "",
+// // 	userPhoneNumber: "",
+// // 	adress:"",
+// // 	websiteURL:"",
+// // 	// name:"",
+// // 	password:"",
+// // 	repeat_password: "",
+// // };
+
+// const Signup = () => {
+//     //   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+
+//     //function to show password
+//     const [showPswIcon, setShowPswIcon] = useState("eyeOpen");
+//     const pass1 = document.querySelector("#userPassword");
+//     const show_password = () => {
+//       // console.log(pass1.type);
+//       if (pass1.type === "password") {
+//         pass1.type = "text";
+//         setShowPswIcon("eyeClose");
+//       } else {
+//         pass1.type = "password";
+//         setShowPswIcon("eyeOpen");
+//       }
+//     };
+
+//     const formik = useFormik({  
+//       initialValues: {
+//         // age: "",
+//         // adress: "",
+//         email: "",
+//         name: "",
+//         password: "",
+//         repeat_password: "",
+//         // userPhoneNumber: "",
+//         // websiteURL: "",
+//       },
+
+//       validationSchema: yup.object({
+//       age: yup
+//         .number("Enter age in number")
+//         .required("Age is required")
+//         .min(13, "User can't be younger then 13")
+//         .max(35, "User can't be older then 35")
+//         .positive("Age can't be negative")
+//         .integer("Enter age without decimal"),
+//       adress: yup
+//         .string("Enter your Adress")
+//         .required("Adress is required")
+//         .min(3, "Please enter more then 3 characters ")
+//         .max(40, "Please enter within 40 characters "),
+//       email: yup
+//         .string("Enter your email")
+//         .email("Enter your email")
+//         .required("Email is required")
+//         .min(1)
+//         .max(25, "Please enter within 25 characters"),
+//       name: yup
+//         .string("Enter your name")
+//         .required("Name is required")
+//         .min(4, "Please enter more then 4 characters ")
+//         .max(15, "Please enter within 15 characters "),
+//       // .integer("Enter age without decimal")
+//       password: yup
+//         .string("Enter your Password")
+//         .required("Password is required")
+//         .min(6, "Please enter more then 6 characters ")
+//         .max(65, "Please enter within 65 characters "),
+//       repeat_password: yup
+//         .string("Enter your password again")
+//         .required("Please enter your password again")
+//         .min(6, "Please enter more then 6 characters ")
+//         .max(65, "Please enter within 65 characters ")
+//         .oneOf([yup.ref("password"), null], "Passwords must match"), //line to check if two passwords match
+//       userPhoneNumber: yup
+//         .string("Enter your Phone Number")
+//         .required("Phone Number is required")
+//         .min(10, "Please enter more then 10 characters ")
+//         .max(15, "Please enter within 15 characters "),
+//       websiteURL: yup
+//         .string()
+//         .url("Only enter Website URL")
+//         .max(40, "Website URL can't be more then 40"),
+
+//       createdOn: yup.date().default(() => new Date()),
+//     }),
+
+//     onSubmit: (values) => {
+//       console.log("value",values);
+//       //do something like there you can call API or send data to firebase
+//         // if (errors) console.log("error i s", errors);
+//     },
+//   });
+//   // console.log(Formik)
+//   // if (formik.errors) console.log("error is", formik.errors);
+
+//   return (
+//     <div className="signupForm">
+//       <br />
+//       <br />
+//       <br />
+//       <br />
+//       <br />
+
+//       <form onSubmit={formik.handleSubmit} className="form form1">
+//         <div className="title">Welcome to Signup</div>
+//         <br />
+//         <div className="subtitle">Let's create your account!</div>
+//         <div className="subtitle" id="inputError"></div>
+//         <div className="input-container ic1">
+//           <input
+//             className="input"
+//             type="text"
+//             autoComplete="off"
+//             id="userName"
+//             placeholder=" "
+//             name="name"
+//             value={formik.values.name}
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//           />
+//           <div className="cut"></div>
+//           <label htmlFor="userName" className="placeholder">
+//             Name *
+//           </label>
+//           <span className="errorSpan">{formik.errors.name}</span>
+//           {formik.touched.name && Boolean(formik.errors.name) ? (
+//             <span className="errorSpan">{formik.errors.name}</span>
+//           ) : null}
+//         </div>
+//         <br />
+//         <br />   <br />
+//         <div className="input-container ic2">
+//           <input
+//             className="input"
+//             id="email"
+//             type="email"
+//             placeholder=" "
+//             name="email"
+//             value={formik.values.email}
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//           />
+//           <div className="cut"></div>
+//           <label htmlFor="email" className="placeholder"> 
+//             Email *
+//           </label>
+//           {formik.touched.email && Boolean(formik.errors.email) ? (
+//             <span className="errorSpan">{formik.errors.email}</span>
+//           ) : null}
+//         </div>
+//         <br />
+//         <br />
+      
+//         <br />
+//         <div className="input-container ic2">
+//           <input
+//             id="userPassword"
+//             className="input"
+//             type="password"
+//             placeholder=" "
+//             name="password"
+//             value={formik.values.password}
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//           />
+//           <div className="cut cut-short"></div>
+//           <label htmlFor="Password" className="placeholder">
+//             Create Password *
+//           </label>
+//           <button type="button" className="showPswBtn" onClick={show_password}>
+//             {showPswIcon === "eyeOpen" ? <FaRegEyeSlash /> : <FaRegEye />}
+//           </button>
+//           {formik.touched.password && Boolean(formik.errors.password) ? (
+//             <span className="errorSpan">{formik.errors.password}</span>
+//           ) : null}
+//         </div>
+//         <br />   <br />   <br />
+//         {/* <input type="checkbox" onClick={show_password} /> */}
+//         {/* <span className="showPassword">Show Password</span> */}
+//         <div className="input-container ic2">
+//           <input
+//             id="repeat_password"
+//             className="input"
+//             type="password"
+//             placeholder=" "
+//             name="repeat_password"
+//             value={formik.values.repeat_password}
+//             onChange={formik.handleChange}
+//             onBlur={formik.handleBlur}
+//           />
+//           <div className="cut cut-short"></div>
+//           <label htmlFor="repeat_password" className="placeholder">
+//             Repeat Password
+//           </label>
+//           {formik.touched.repeat_password &&
+//           Boolean(formik.errors.repeat_password) ? (
+//             <span className="errorSpan">{formik.errors.repeat_password}</span>
+//           ) : null}
+//         </div>
+//         <br /> <br />
+//         <br />
+//         {/* <p id="error_msg">{errors}</p> */}
+//         <div className="mainDiv">
+//           <button type="submit" className="submitBtn">
+//             SUBMIT
+//           </button>
+//         </div>
+//         <br />
+//         <div className="subtitle">by Shehzad</div>
+//         <br />
+//       </form>
+//       <br />
+//     </div>
+//   );
+// };
+
+// export default Signup;
