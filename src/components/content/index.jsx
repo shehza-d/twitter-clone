@@ -141,10 +141,10 @@ const Content = () => {
         </i>
       </header>
 
-      <div className="myProfileContainer">
-        <form onSubmit={savePost}>
-          <div className="flex">
-            <a href="https://twitter.com/Shehza_d_">
+      
+        <form onSubmit={savePost} className="myProfileContainer_Form">
+          <div className="mainPostFormDiv">
+            <a href="https://twitter.com/Shehza_d_" className="myProfileA">
               <img
                 className="profilePhoto"
                 src="https://pbs.twimg.com/profile_images/1519059538556723203/ouFwv4wv_400x400.jpg"
@@ -152,17 +152,17 @@ const Content = () => {
               />
             </a>
 
-            <input
+            <textarea
               className="postInput"
               type="text"
               placeholder="What's Happening?"
               onChange={(e) => setPostText(e.target.value)}
             />
-            <label name="postPicture">
+            <label name="postPictureInput" className="postPictureInput">
               <input
                 className="imgInput"
                 type="file"
-                name="postPicture"
+                name="postPictureInput"
                 accept="image/*"
                 placeholder="dg"
                 onChange={(e) => {
@@ -174,10 +174,9 @@ const Content = () => {
             </label>
           </div>
           <div className="postOptions">
-            <ul>
+            <ul className="postOptionsIcons">
               <li>
-                <BsImage />
-                <IoImageOutline />
+                <BsImage title="hello"/>
               </li>
               <li>
                 <AiOutlineFileGif />
@@ -200,7 +199,7 @@ const Content = () => {
             </button>
           </div>
         </form>
-      </div>
+     
 
       {posts?.map((eachPost, i) => (
         <Posts
