@@ -3,6 +3,8 @@ import './App.css';
 import Content from './components/content';
 import Sidebar from './components/sidebar';
 import Menubar from './components/menubar';
+import Signup from './components/signup';
+import Login from './components/login';
 import { useState } from 'react';
 
 const App = () => {
@@ -22,9 +24,10 @@ const App = () => {
   
   return (
     <div className={`App ${themeMode==="dark"?"dark":"light"}`}  >
-      <Menubar />
+      {/* <Menubar />
       <Content />
-      <Sidebar toggleThemeMode={toggleThemeMode} mode={themeMode}/>
+      <Sidebar toggleThemeMode={toggleThemeMode} mode={themeMode}/> */}
+ <Login/>
     </div>
   );
 }
