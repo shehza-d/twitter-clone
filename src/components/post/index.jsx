@@ -105,8 +105,9 @@ const Posts = (props) => {
       </div>
 
       {props.id === editing.editingId ? (
-        <form onSubmit={updatePost}>
+        <form onSubmit={updatePost} className="updateForm">
           <input
+          className="updateInput"
             type="text"
             value={editing.editingText}
             onChange={(e) => {
@@ -115,7 +116,7 @@ const Posts = (props) => {
                 editingText: e.target.value,
               });
             }}
-            placeholder="please enter updated value"
+            placeholder="Please enter updated value"
           />
           <button type="submit">Update</button>
         </form>
