@@ -1,5 +1,5 @@
 import Posts from "../post";
-import './style.css'
+import "./style.css";
 import { BsStars, BsImage } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
@@ -11,43 +11,16 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { MdAddAPhoto } from "react-icons/md";
 import axios from "axios";
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  onSnapshot,
-  query,
-  serverTimestamp,
-  orderBy,
-  deleteDoc,
-  updateDoc,
+import { db } from "../../firebase";
+import {                   
+  collection,  addDoc,
+  onSnapshot,  query,
+  serverTimestamp,  orderBy,
   limit,
 } from "firebase/firestore";
 
 // import axios from 'axios';
 // import HomeSvg from '../img/home.svg';
-
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDSFR44NqKejUJV8TKLhlAOD63wQ4bpOGM",
-  authDomain: "twetterdb.firebaseapp.com",
-  projectId: "twetterdb",
-  storageBucket: "twetterdb.appspot.com",
-  messagingSenderId: "494029255747",
-  appId: "1:494029255747:web:44e7e0908cf662afa490f6",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
 
 const Content = () => {
   const [posts, setPosts] = useState([]);
@@ -141,65 +114,63 @@ const Content = () => {
         </i>
       </header>
 
-      
-        <form onSubmit={savePost} className="myProfileContainer_Form">
-          <div className="mainPostFormDiv">
-            <a href="https://twitter.com/Shehza_d_" className="myProfileA">
-              <img
-                className="profilePhoto"
-                src="https://pbs.twimg.com/profile_images/1519059538556723203/ouFwv4wv_400x400.jpg"
-                alt="twitter DP"
-              />
-            </a>
-
-            <textarea
-              className="postInput"
-              type="text"
-              placeholder="What's Happening?"
-              onChange={(e) => setPostText(e.target.value)}
+      <form onSubmit={savePost} className="myProfileContainer_Form">
+        <div className="mainPostFormDiv">
+          <a href="https://twitter.com/Shehza_d_" className="myProfileA">
+            <img
+              className="profilePhoto"
+              src="https://pbs.twimg.com/profile_images/1519059538556723203/ouFwv4wv_400x400.jpg"
+              alt="twitter DP"
             />
-            <label name="postPictureInput" className="postPictureInput">
-              <input
-                className="imgInput"
-                type="file"
-                name="postPictureInput"
-                accept="image/*"
-                placeholder="dg"
-                onChange={(e) => {
-                  console.log(e.currentTarget.files[0]);
-                  setPic(e.currentTarget.files[0]);
-                }}
-              />
-              <MdAddAPhoto />
-            </label>
-          </div>
-          <div className="postOptions">
-            <ul className="postOptionsIcons">
-              <li>
-                <BsImage title="hello"/>
-              </li>
-              <li>
-                <AiOutlineFileGif />
-              </li>
-              <li>
-                <BiPoll />
-              </li>
-              <li>
-                <TbMoodCrazyHappy />
-              </li>
-              <li>
-                <GrSchedulePlay />
-              </li>
-              <li>
-                <MdOutlineAddLocationAlt />
-              </li>
-            </ul>
-            <button type="submit" className="tweetBtn">
-              Tweet
-            </button>
-          </div>
-        </form>
-     
+          </a>
+
+          <textarea
+            className="postInput"
+            type="text"
+            placeholder="What's Happening?"
+            onChange={(e) => setPostText(e.target.value)}
+          />
+          <label name="postPictureInput" className="postPictureInput">
+            <input
+              className="imgInput"
+              type="file"
+              name="postPictureInput"
+              accept="image/*"
+              placeholder="dg"
+              onChange={(e) => {
+                console.log(e.currentTarget.files[0]);
+                setPic(e.currentTarget.files[0]);
+              }}
+            />
+            <MdAddAPhoto />
+          </label>
+        </div>
+        <div className="postOptions">
+          <ul className="postOptionsIcons">
+            <li>
+              <BsImage title="hello" />
+            </li>
+            <li>
+              <AiOutlineFileGif />
+            </li>
+            <li>
+              <BiPoll />
+            </li>
+            <li>
+              <TbMoodCrazyHappy />
+            </li>
+            <li>
+              <GrSchedulePlay />
+            </li>
+            <li>
+              <MdOutlineAddLocationAlt />
+            </li>
+          </ul>
+          <button type="submit" className="tweetBtn">
+            Tweet
+          </button>
+        </div>
+      </form>
 
       {posts?.map((eachPost, i) => (
         <Posts

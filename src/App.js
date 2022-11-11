@@ -5,43 +5,19 @@ import Sidebar from "./components/sidebar";
 import Menubar from "./components/menubar";
 import Signup from "./components/signup";
 import Login from "./components/login";
+
+import About from "./components/extras/about";
+import Profile from "./components/extras/profile";
+
 import { useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  onSnapshot,
-  query,
-  serverTimestamp,
-  orderBy,
-  deleteDoc,
-  updateDoc,
-  limit,
-} from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDSFR44NqKejUJV8TKLhlAOD63wQ4bpOGM",
-  authDomain: "twetterdb.firebaseapp.com",
-  projectId: "twetterdb",
-  storageBucket: "twetterdb.appspot.com",
-  messagingSenderId: "494029255747",
-  appId: "1:494029255747:web:44e7e0908cf662afa490f6",
-};
-const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+import { auth } from "./firebase";
 
 const App = () => {
   // const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');nnif (prefersDarkScheme.matches) {n  document.body.classList.add('dark-theme');n} else {n  document.body.classList.remove('dark-theme');n}
   const [themeMode, setThemeMode] = useState("light");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const toggleThemeMode = () => {
     if (themeMode === "dark") {
@@ -77,8 +53,12 @@ const App = () => {
               </>
             }
           />
-          {/* <Route path="about" element={<About />} /> */}
-          {/* <Route path="gallery" element={<Gallery />} /> */}
+
+          {/* to remove */}
+          <Route path="about" element={<About />} />
+          <Route path="profile" element={<Profile />} />
+          {/* to remove */}
+
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
       ) : (

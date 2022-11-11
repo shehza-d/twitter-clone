@@ -5,24 +5,10 @@ import { IoHeartOutline } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { CgOptions } from "react-icons/cg";
 import { useState } from "react";
-import { initializeApp } from "firebase/app";
+
 import moment from "moment";
-import { getFirestore, doc, deleteDoc, updateDoc } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDSFR44NqKejUJV8TKLhlAOD63wQ4bpOGM",
-  authDomain: "twetterdb.firebaseapp.com",
-  projectId: "twetterdb",
-  storageBucket: "twetterdb.appspot.com",
-  messagingSenderId: "494029255747",
-  appId: "1:494029255747:web:44e7e0908cf662afa490f6",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Cloud Firestore and get a reference to the service
-const db = getFirestore(app);
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import {db} from '../../firebase'
 
 const Posts = (props) => {
   const [editing, setEditing] = useState({
